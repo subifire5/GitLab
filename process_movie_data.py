@@ -1,9 +1,10 @@
 #! /usr/bin/env python3
 # A script that imports movie data and finds the top-5 highest grossing movies
 import csv
+import argparse
 
+def find_top_n(filename, n=19):
 
-def find_top_5(filename):
     """Finds the top 5 highest grossing movies in a CSV dataset.
        Input: filename, a string - points to filename of dataset
        Output: None
@@ -22,10 +23,11 @@ def find_top_5(filename):
     # Sort data and get top 5
     gross_sort = lambda x : x["Gross"]
     rows.sort(key=gross_sort)
-    top_five = rows[:-6:-1]
+    top_n = rows[:-(n+1):-1]
 
     # Print out results
-    for i, row in enumerate(top_five):
+    for i, row in enumerate(top_n):
+
         print("{ind}. {row[Title]} ({row[Year]}) - ${row[Gross]:,d}".format(
             ind=i+1,
             row=row))
@@ -35,4 +37,11 @@ def find_top_5(filename):
 # Movie data comes from "Movie Gross and Ratings" dataset on Kaggle by Yashwanth Sharaf
 # https://www.kaggle.com/datasets/thedevastator/movie-gross-and-ratings-from-1989-to-2014
 if __name__ == "__main__":
-    find_top_5("Movies_gross_rating.csv")
+    # from https://stackoverflow.com/questions/4033723/how-do-i-access-command-line-arguments
+    parser = argparse.ArgumentParser("movie_top_n")
+    # from https://stackoverflow.com/questions/15754208/how-to-make-argument-optional-in-python-argparse
+    parser.add_argument("n", nargs='?', help="get the top (n) movies", type=int)
+    args = parser.parse_args()
+    n = args.n if args.n is not None else 10
+    find_top_n("Movies_gross_rating.csv", n)
+

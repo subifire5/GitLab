@@ -21,6 +21,10 @@ xanda_0000_movie_processing?
 
 4. What changed between commit e474c and 82045?
 
+    in process_movie_data.py, added
+    gross_sort = lambda x : int(x["Gross"])
+    and 
+    top_five = rows[:-6:-1]
 
 
 ## Predicting merges

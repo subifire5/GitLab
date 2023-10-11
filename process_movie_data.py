@@ -3,7 +3,8 @@
 import csv
 import argparse
 
-def find_top_n(filename, n=5):
+def find_top_n(filename, n=19):
+
     """Finds the top 5 highest grossing movies in a CSV dataset.
        Input: filename, a string - points to filename of dataset
        Output: None
@@ -26,6 +27,7 @@ def find_top_n(filename, n=5):
 
     # Print out results
     for i, row in enumerate(top_n):
+
         print("{ind}. {row[Title]} ({row[Year]}) - ${row[Gross]:,d}".format(
             ind=i+1,
             row=row))
@@ -40,5 +42,6 @@ if __name__ == "__main__":
     # from https://stackoverflow.com/questions/15754208/how-to-make-argument-optional-in-python-argparse
     parser.add_argument("n", nargs='?', help="get the top (n) movies", type=int)
     args = parser.parse_args()
-    n = args.n if args.n is not None else 5 
+    n = args.n if args.n is not None else 10
     find_top_n("Movies_gross_rating.csv", n)
+

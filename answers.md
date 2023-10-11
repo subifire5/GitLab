@@ -48,12 +48,18 @@ git checkout test
 git merge top_N
 ```
 
+I'd expect test to be merged into top_N, or top_N to be merged into test. Probably test into top_N, so that top_N is updated with info from test.
+
 6. What do you think would happen if you ran the following commands?
 What branches would change, and how?
 ```
 git checkout top_ten
 git merge test
 ```
+
+I'd expect top_ten to be merged into test branch
+test branch would change
+
 
 7. What do you think would happen if you ran the following commands?
 What branches would change, and how?
@@ -62,3 +68,5 @@ git checkout test
 git rebase top_ten
 git rebase top_N
 ```
+
+I'd expect test to get the changes from top_ten and top_N
